@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Test Article',
+    date: 'Jul 17, 2019',
+    firstParagraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    secondParagraph: 'Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Tincidunt ornare massa eget egestas purus viverra accumsan in. Elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue. Sed viverra ipsum nunc aliquet bibendum enim facilisis. Magna fringilla urna porttitor rhoncus dolor purus non enim. Lectus mauris ultrices eros in cursus turpis massa tincidunt dui. Mi tempus imperdiet nulla malesuada. Sit amet consectetur adipiscing elit duis tristique. Tristique senectus et netus et malesuada fames ac turpis. Molestie nunc non blandit massa enim.',
+    thirdParagraph: 'Fermentum posuere urna nec tincidunt praesent semper feugiat. Mauris augue neque gravida in. Mi proin sed libero enim sed faucibus turpis in. Et ultrices neque ornare aenean euismod. Pharetra magna ac placerat vestibulum lectus mauris ultrices. Etiam non quam lacus suspendisse. Quisque egestas diam in arcu cursus euismod quis viverra nibh. Consectetur adipiscing elit duis tristique sollicitudin nibh sit. Ut tortor pretium viverra suspendisse potenti nullam ac tortor. Id neque aliquam vestibulum morbi blandit cursus. Enim ut sem viverra aliquet.'
   }
 ];
 
@@ -112,3 +119,54 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
 
 */
+
+function createArticle(article) {
+
+    // create elements
+    let articleH2 = document.createElement('h2');
+    let articleDate = document.createElement('time');
+    let paragraph1 = document.createElement('p');
+    let paragraph2 = document.createElement('p');
+    let paragraph3 = document.createElement('p');
+    let articleDiv = document.createElement('div');
+    let spanButton = document.createElement('span');
+
+    // style elements
+    articleDate.classList.add('date');
+    spanButton.classList.add('expandButton');
+    articleDiv.classList.add('article');
+
+    // event listener
+
+    spanButton.addEventListener('click', () => {
+      articleDiv.classList.toggle('article-open');
+    })
+
+    // add content to elements
+    articleH2.textContent = article.title;
+    articleDate.textContent = article.date;
+    paragraph1.textContent = article.firstParagraph;
+    paragraph2.textContent = article.secondParagraph;
+    paragraph3.textContent = article.thirdParagraph;
+    spanButton.textContent = 'Click';
+
+    // add elements to article Div
+    articleDiv.appendChild(articleH2);
+    articleDiv.appendChild(articleDate);
+    articleDiv.appendChild(paragraph1);
+    articleDiv.appendChild(paragraph2);
+    articleDiv.appendChild(paragraph3);
+    articleDiv.appendChild(spanButton);
+
+    return articleDiv;
+}
+
+const articlesArray = data.map((article) => {
+  return createArticle(article);
+})
+
+const articlesList = document.querySelector('.articles');
+
+articlesArray.forEach((item) => {
+  articlesList.appendChild(item);
+})
